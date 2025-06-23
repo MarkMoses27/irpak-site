@@ -1,115 +1,230 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-
-const NAV_ITEMS = [
-  { name: 'Home', path: '/' },
-  { name: 'About Us', path: '/about' },
-  { name: 'Programs & Initiatives', path: '/programs' },
-  { name: 'Events', path: '/events' },
-  { name: 'Get Involved', path: '/involved' },
-  { name: 'Media & Gallery', path: '/media' },
-  { name: 'Resources', path: '/resources' },
-  { name: 'News & Blog', path: '/news' },
-  { name: 'Partners & Sponsors', path: '/partners' },
-  { name: 'Contact Us', path: '/contact' },
-];
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? 'hidden' : 'auto';
-    return () => { document.body.style.overflow = 'auto'; };
-  }, [mobileMenuOpen]);
+  const navStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '16px 40px',
+    fontFamily: 'monospace',
+    fontSize: '14px',
+    backgroundColor: 'white',
+    position: 'relative',
+    flexWrap: 'wrap',
+    overflow: 'visible'
+  };
 
-  const CHOC = '#42210B';
-  const ORANGE = '#FF5C00';
+  const logoStyle = {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    color: '#111',
+    flex: '1 1 auto'
+  };
+
+  const centerNavStyle = {
+    display: isMobile ? (mobileOpen ? 'flex' : 'none') : 'flex',
+    flexDirection: isMobile ? 'column' : 'row',
+    gap: isMobile ? '16px' : '30px',
+    alignItems: isMobile ? 'flex-start' : 'center',
+    justifyContent: 'center',
+    flex: '2 1 auto',
+    position: isMobile ? 'absolute' : 'relative',
+    top: isMobile ? '100%' : 'auto',
+    left: isMobile ? 0 : 'auto',
+    width: isMobile ? '100%' : 'auto',
+    backgroundColor: isMobile ? 'white' : 'transparent',
+    borderTop: isMobile ? '1px solid #ddd' : 'none',
+    padding: isMobile ? '16px' : '0',
+    zIndex: 999,
+    overflow: 'visible'
+  };
+
+  const navItemStyle = {
+    position: 'relative',
+    color: '#111',
+    cursor: 'pointer',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: '4px',
+    minWidth: 'max-content',
+    overflow: 'visible'
+  };
+
+  const dropdownStyle = (index) => ({
+    backgroundColor: '#fff',
+    border: isMobile ? 'none' : '1px solid #ddd',
+    borderRadius: isMobile ? '0' : '4px',
+    boxShadow: isMobile ? 'none' : '0 2px 8px rgba(0,0,0,0.1)',
+    marginTop: '8px',
+    zIndex: 1000,
+    display: 'flex',
+    flexDirection: 'column',
+    minWidth: '220px',
+    pointerEvents: 'auto',
+    overflow: 'visible',
+    position: isMobile ? 'relative' : 'absolute',
+    top: isMobile ? 'auto' : '70%',
+    left: isMobile ? 'auto' : index > 7 ? 'auto' : 0,
+    right: isMobile ? 'auto' : index > 7 ? 0 : 'auto'
+  });
+
+  const dropdownItemStyle = {
+    padding: '10px 15px',
+    textDecoration: 'none',
+    color: '#333',
+    whiteSpace: 'nowrap',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  };
+
+  const arrowStyle = {
+    fontSize: '0.8rem',
+    transition: 'transform 0.2s ease',
+    display: 'inline-block',
+    transform: 'rotate(-90deg)'
+  };
+
+  const arrowRotatedStyle = {
+    ...arrowStyle,
+    transform: 'rotate(90deg)'
+  };
+
+  const hamburgerStyle = {
+    display: isMobile ? 'block' : 'none',
+    cursor: 'pointer',
+    fontSize: '24px',
+    padding: '8px 12px',
+    border: '1px solid #ccc',
+    borderRadius: '6px',
+    backgroundColor: '#f3f3f3',
+    marginLeft: 'auto'
+  };
+
+  const menuItems = [
+    { title: 'Home', href: '/' },
+    { title: 'About Us', href: '/about' },
+    {
+      title: 'Programs',
+      submenu: [
+        { title: 'Community Arts Development', href: '/programs/community-arts' },
+        { title: 'Youth Talent Nurturing', href: '/programs/youth-talent' },
+        { title: 'IRPAK World Culture Day', href: '/programs/world-culture-day' },
+        { title: 'Performing Arts for economic development', href: '/programs/performing-arts' },
+        { title: 'Arts tours', href: '/programs/arts-tours' }
+      ]
+    },
+    {
+      title: 'Events',
+      submenu: [
+        { title: 'Upcoming Events', href: '/events/upcoming' },
+        { title: 'Past Events', href: '/events/past' },
+        { title: 'Annual Festival Highlights', href: '/events/highlights' },
+        { title: 'How to Participate or Volunteer', href: '/events/participate' }
+      ]
+    },
+    {
+      title: 'Get Involved',
+      submenu: [
+        { title: 'Volunteer With Us', href: '/get-involved/volunteer' },
+        { title: 'Become a Member', href: '/get-involved/member' },
+        { title: 'Internship & Mentorship Opportunities', href: '/get-involved/opportunities' }
+      ]
+    },
+    {
+      title: 'Media',
+      submenu: [
+        { title: 'Photo Gallery', href: '/media/gallery' },
+        { title: 'Videos', href: '/media/videos' },
+        { title: 'Testimonials', href: '/media/testimonials' },
+        { title: 'Event Highlights', href: '/media/highlights' },
+        { title: 'Press Mentions & Articles', href: '/media/press' }
+      ]
+    },
+    {
+      title: 'Resources',
+      submenu: [
+        { title: 'Reports & Publications', href: '/resources/reports' },
+        { title: 'Policy Documents', href: '/resources/policies' },
+        { title: 'Downloadable Forms', href: '/resources/forms' }
+      ]
+    },
+    {
+      title: 'Blog',
+      submenu: [
+        { title: 'Latest Announcements', href: '/blog/announcements' },
+        { title: 'Stories from the Community', href: '/blog/stories' },
+        { title: 'Feature Articles', href: '/blog/features' }
+      ]
+    },
+    {
+      title: 'Partners & Sponsors',
+      submenu: [
+        { title: 'Our Current Partners', href: '/partners/current' },
+        { title: 'Partnership Opportunities', href: '/partners/opportunities' }
+      ]
+    },
+    {
+      title: 'Contact Us',
+      submenu: [
+        { title: 'Contact Information', href: '/contact/info' },
+        { title: 'Online Inquiry Form', href: '/contact/inquiry' },
+        { title: 'Map/Directions to IRPAK Office', href: '/contact/map' },
+        { title: 'Social Media Links', href: '/contact/social' }
+      ]
+    }
+  ];
 
   return (
-    <header
-      className={`fixed top-0 w-full z-50 transition-all duration-500 bg-white/10 backdrop-blur-sm ${isScrolled ? 'bg-white/95 shadow-md py-3' : 'py-4'}`}
-      style={{ fontFamily: 'Poppins, sans-serif' }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center">
-          <div className="bg-[#42210B] text-white font-bold text-xl sm:text-2xl px-4 py-2 rounded-lg">
-            IRPAK
-          </div>
-        </div>
+    <nav style={navStyle}>
+      <div style={logoStyle}>IRPAK</div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-6 md:space-x-8 lg:space-x-10">
-          {NAV_ITEMS.map((item, idx) => (
-            <a
-              key={idx}
-              href={item.path}
-              className="text-[#FF5C00] font-medium text-sm md:text-base px-3 py-2 rounded-md hover:bg-[#FF5C00] hover:text-white transition"
-            >
-              {item.name}
-            </a>
-          ))}
-        </nav>
+      <div style={hamburgerStyle} onClick={() => setMobileOpen(!mobileOpen)}>
+        {mobileOpen ? '✕' : '☰'}
+      </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex items-center lg:hidden">
-          <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="p-2 text-[#FF5C00] hover:bg-[#FF5C00] hover:text-white rounded-lg transition"
-            aria-label="Open menu"
+      <div style={centerNavStyle}>
+        {menuItems.map((item, index) => (
+          <div
+            key={index}
+            style={navItemStyle}
+            onMouseEnter={() => !isMobile && setActiveMenu(index)}
+            onMouseLeave={() => !isMobile && setActiveMenu(null)}
+            onClick={() => isMobile && setActiveMenu(activeMenu === index ? null : index)}
           >
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Overlay */}
-      <div
-        className={`fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity lg:hidden ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-        onClick={() => setMobileMenuOpen(false)}
-      />
-
-      {/* Mobile Panel */}
-      <div
-        className={`fixed top-0 right-0 z-50 h-full w-72 sm:w-80 bg-white shadow-xl transform transition-transform lg:hidden ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
-      >
-        <div className="flex flex-col h-full">
-          {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b">
-            <div className="bg-[#42210B] text-white font-bold text-2xl px-4 py-2 rounded-lg">
-              IRPAK
-            </div>
-            <button
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2 text-[#FF5C00] hover:bg-[#FF5C00] hover:text-white rounded-lg transition"
-              aria-label="Close menu"
-            >
-              <X className="w-6 h-6" />
-            </button>
+            {!item.submenu ? (
+              <Link to={item.href || '#'} style={{ textDecoration: 'none', color: '#111', }}>
+                {item.title}
+              </Link>
+            ) : (
+              <span style={{ color: '#111' }}>
+                {item.title} <span style={activeMenu === index ? arrowRotatedStyle : arrowStyle}>&rarr;</span>
+              </span>
+            )}
+            {activeMenu === index && item.submenu && (
+              <div style={dropdownStyle(index)}>
+                {item.submenu.map((subItem, subIdx) => (
+                  <Link key={subIdx} to={subItem.href || '#'} style={dropdownItemStyle}>
+                    {subItem.title} <span style={{ fontSize: '10px' }}>&rarr;</span>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
-
-          {/* Links */}
-          <nav className="flex-1 overflow-y-auto p-4 space-y-4">
-            {NAV_ITEMS.map((item, idx) => (
-              <a
-                key={idx}
-                href={item.path}
-                className="block text-[#FF5C00] font-medium text-base px-4 py-3 rounded-lg hover:bg-[#FF5C00] hover:text-white transition"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </a>
-            ))}
-          </nav>
-        </div>
+        ))}
       </div>
-    </header>
+    </nav>
   );
 }
