@@ -141,7 +141,7 @@ export default function Navbar() {
     {
       title: 'Media',
       submenu: [
-        { title: 'Photo Gallery', href: '/media/gallery' },
+        { title: 'Photo Gallery', href: '/gallery' },
         { title: 'Videos', href: '/media/videos' },
         { title: 'Testimonials', href: '/media/testimonials' },
         { title: 'Event Highlights', href: '/media/highlights' },

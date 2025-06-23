@@ -16,6 +16,7 @@ import Contact from './components/Contact';
 import Volunteer from './components/involved/Involved';
 import Member from './components/involved/BecomeMember';
 import Opportunities from './components/involved/InternshipOpportunities';
+import Gallery from './components/media/Gallery'; // Assuming you have a PhotoGallery component
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/member" element={<Member />} />
           <Route path="/opportunities" element={<Opportunities />} />
           <Route path="/" element={<Opportunities />} />
+          <Route path="/gallery" element={<Gallery />} />
 
           
         </Route>
