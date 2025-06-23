@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { href, Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -127,13 +127,8 @@ export default function Navbar() {
       ]
     },
     {
-      title: 'Events',
-      submenu: [
-        { title: 'Upcoming Events', href: '/events/upcoming' },
-        { title: 'Past Events', href: '/events/past' },
-        { title: 'Annual Festival Highlights', href: '/events/highlights' },
-        { title: 'How to Participate or Volunteer', href: '/events/participate' }
-      ]
+      title: 'Events', href: '/events',
+      
     },
     {
       title: 'Get Involved',
