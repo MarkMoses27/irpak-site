@@ -138,9 +138,9 @@ export default function Navbar() {
     {
       title: 'Get Involved',
       submenu: [
-        { title: 'Volunteer With Us', href: '/get-involved/volunteer' },
-        { title: 'Become a Member', href: '/get-involved/member' },
-        { title: 'Internship & Mentorship Opportunities', href: '/get-involved/opportunities' }
+        { title: 'Volunteer With Us', href: '/volunteer' },
+        { title: 'Become a Member', href: '/member' },
+        { title: 'Internship & Mentorship Opportunities', href: '/opportunities' }
       ]
     },
     {
@@ -178,12 +178,7 @@ export default function Navbar() {
     },
     {
       title: 'Contact Us',
-      submenu: [
-        { title: 'Contact Information', href: '/contact/info' },
-        { title: 'Online Inquiry Form', href: '/contact/inquiry' },
-        { title: 'Map/Directions to IRPAK Office', href: '/contact/map' },
-        { title: 'Social Media Links', href: '/contact/social' }
-      ]
+      href: '/contact'
     }
   ];
 
