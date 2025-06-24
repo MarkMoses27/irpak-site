@@ -6,7 +6,7 @@ const AboutUs = () => {
     <div className="about-container">
       {/* Hero Section */}
       <section className="about-hero">
-        <img src="" alt="IRPAK Banner Placeholder" className="hero-image" />
+        <img src="your-image.jpg" alt="IRPAK Banner" className="hero-image" />
         <div className="hero-overlay">
           <h1>About IRPAK</h1>
           <p>Integrity Rays of Performing Arts Kenya (IRPAK) is a community-rooted nonprofit organization dedicated to promoting culture, arts, and heritage as powerful tools for empowerment, unity, and social transformation.</p>
@@ -35,39 +35,6 @@ const AboutUs = () => {
           <p>
             A vibrant cultural ecosystem in Kenya and Africa where every individual has the opportunity to express, preserve, and benefit from our shared heritage.
           </p>
-        </div>
-      </section>
-
-      {/* Impact Metrics */}
-      <section className="about-impact">
-        <h2>Our Impact</h2>
-        <div className="impact-stats">
-          <div className="stat">
-            <h3>50+</h3>
-            <p>Communities Served</p>
-          </div>
-          <div className="stat">
-            <h3>200+</h3>
-            <p>Projects Completed</p>
-          </div>
-          <div className="stat">
-            <h3>1,000+</h3>
-            <p>Youth Trained</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="about-team">
-        <h2>Meet Our Team</h2>
-        <div className="team-grid">
-          {[1, 2, 3, 4].map((member) => (
-            <div key={member} className="team-member">
-              <img src="" alt={`Team member ${member} placeholder`} className="member-photo" />
-              <h3>Member Name {member}</h3>
-              <p>Role / Title</p>
-            </div>
-          ))}
         </div>
       </section>
 

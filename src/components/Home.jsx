@@ -59,37 +59,28 @@ const HomePage = () => {
   return (
     <div className="font-sans bg-white">
       
-      {/* Hero Section - Overview of IRPAK */}
+      {/* Hero Section */}
       <section className="relative min-h-screen bg-gradient-to-br from-amber-900 via-amber-800 to-orange-600 flex items-center justify-center overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="absolute inset-0 opacity-20" style={{ 
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white' fill-opacity='0.1'%3E%3Cpath d='M30 30c0 11.046-8.954 20-20 20s-20-8.954-20-20 8.954-20 20-20 20 8.954 20 20zm-3 0c0-9.389-7.611-17-17-17s-17 7.611-17 17 7.611 17 17 17 17-7.611 17-17z'/%3E%3C/g%3E%3C/svg%3E")`
-        }}></div>
-        
-        {/* Floating Animation Elements */}
-        <div className="absolute top-10 left-4 sm:top-20 sm:left-10 text-4xl sm:text-6xl animate-bounce opacity-60">🎭</div>
-        <div className="absolute top-32 right-4 sm:top-40 sm:right-20 text-3xl sm:text-4xl animate-pulse opacity-60">🎵</div>
-        <div className="absolute bottom-32 left-4 sm:bottom-40 sm:left-20 text-4xl sm:text-5xl animate-bounce opacity-60" style={{animationDelay: '0.5s'}}>🌍</div>
-        <div className="absolute bottom-10 right-4 sm:bottom-20 sm:right-10 text-2xl sm:text-3xl animate-pulse opacity-60" style={{animationDelay: '1s'}}>✨</div>
-        
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 opacity-30" style={{
+          backgroundImage: `url('your-image.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(8px)'}}>
+        </div>
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <div className="space-y-6 sm:space-y-8">
-            {/* Main Title */}
-            <div className="space-y-4">
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight">
-                <span className="block text-white">INTEGRITY RAYS OF</span>
-                <span className="block text-yellow-400 bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">PERFORMING ARTS</span>
-                <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium mt-2 sm:mt-4 text-white/90">KENYA</span>
-              </h1>
-            </div>
-            
+            {/* Title */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight text-shadow-lg">
+              <span className="block text-white">INTEGRITY RAYS OF</span>
+              <span className="block text-yellow-400">PERFORMING ARTS</span>
+              <span className="block text-xl sm:text-2xl">KENYA</span>
+            </h1>
+
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl max-w-5xl mx-auto leading-relaxed text-white/90 px-4">
+            <p className="text-lg sm:text-xl max-w-4xl mx-auto leading-relaxed text-white/90">
               Empowering individuals through arts, culture, and community-driven programs across Kenya
             </p>
-            
-            {/* Key Highlights */}
+
+            {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto mt-8 sm:mt-12">
               {stats.map((stat, index) => (
                 <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4 hover:bg-white/20 transition-all duration-300">
@@ -99,16 +90,14 @@ const HomePage = () => {
                 </div>
               ))}
             </div>
-            
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mt-8 sm:mt-12 px-4">
-              <button className="group bg-orange-600 hover:bg-orange-700 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 hover:shadow-2xl transform hover:scale-105 flex items-center w-full sm:w-auto justify-center">
-                Discover Our Story
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+
+            {/* Buttons */}
+            <div className="flex gap-6 justify-center mt-8 sm:mt-12">
+              <button className="group bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-full transition-all duration-300 hover:shadow-lg">
+                Discover Our Story <ArrowRight className="ml-2 w-5 h-5" />
               </button>
-              <button className="group bg-transparent border-2 border-white hover:bg-white hover:text-amber-900 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 flex items-center w-full sm:w-auto justify-center">
-                <Play className="mr-2 w-5 h-5" />
-                Watch Our Impact
+              <button className="group border-2 border-white hover:bg-white hover:text-orange-600 text-white px-6 py-3 rounded-full transition-all duration-300">
+                <Play className="mr-2 w-5 h-5" /> Watch Our Impact
               </button>
             </div>
           </div>
@@ -129,43 +118,34 @@ const HomePage = () => {
               Built on strong values and clear vision, we drive meaningful change through arts and culture
             </p>
           </div>
-          
+
           {/* Mission, Vision, Impact Cards */}
           <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
             {/* Vision */}
-            <div className="group bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-orange-600 transform hover:-translate-y-2">
+            <div className="group bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-orange-600">
               <div className="text-4xl sm:text-5xl mb-4 sm:mb-6 text-center">👁️</div>
               <h3 className="text-xl sm:text-2xl font-bold text-amber-900 mb-3 sm:mb-4 text-center">Vision</h3>
-              <p className="text-gray-600 text-center leading-relaxed font-medium text-sm sm:text-base">
+              <p className="text-gray-600 text-center leading-relaxed text-sm sm:text-base">
                 Value Core of Life, Love, and Social Development
               </p>
-              <div className="mt-4 flex justify-center">
-                <div className="w-12 h-1 bg-orange-600 rounded-full"></div>
-              </div>
             </div>
             
             {/* Mission */}
-            <div className="group bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-amber-900 transform hover:-translate-y-2">
+            <div className="group bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-amber-900">
               <div className="text-4xl sm:text-5xl mb-4 sm:mb-6 text-center">🎯</div>
               <h3 className="text-xl sm:text-2xl font-bold text-amber-900 mb-3 sm:mb-4 text-center">Mission</h3>
               <p className="text-gray-600 text-center leading-relaxed text-sm sm:text-base">
                 Empowering individuals of all genders and backgrounds by promoting the tangible and intangible cultural heritage of Kenya/Africa through arts, education, innovation, and community-driven programs.
               </p>
-              <div className="mt-4 flex justify-center">
-                <div className="w-12 h-1 bg-amber-900 rounded-full"></div>
-              </div>
             </div>
             
             {/* Impact */}
-            <div className="group bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-yellow-500 transform hover:-translate-y-2">
+            <div className="group bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-yellow-500">
               <div className="text-4xl sm:text-5xl mb-4 sm:mb-6 text-center">⚡</div>
               <h3 className="text-xl sm:text-2xl font-bold text-amber-900 mb-3 sm:mb-4 text-center">Impact</h3>
               <p className="text-gray-600 text-center leading-relaxed text-sm sm:text-base">
                 Facilitating socioeconomic transformation through artistic expression, sustainable livelihood programs, and fostering national and international networking opportunities.
               </p>
-              <div className="mt-4 flex justify-center">
-                <div className="w-12 h-1 bg-yellow-500 rounded-full"></div>
-              </div>
             </div>
           </div>
           
@@ -188,7 +168,6 @@ const HomePage = () => {
 
       {/* Upcoming Events Banner */}
       <section className="py-12 sm:py-16 lg:py-20 bg-amber-900 text-white relative overflow-hidden">
-        {/* Background Pattern */}
         <div className="absolute inset-0 bg-gradient-to-r from-amber-900 via-amber-800 to-orange-600 opacity-90"></div>
         <div className="absolute inset-0 opacity-10" style={{ 
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white' fill-opacity='0.3'%3E%3Cpath d='M40 40c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24zm-4 0c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z'/%3E%3C/g%3E%3C/svg%3E")`
@@ -206,23 +185,19 @@ const HomePage = () => {
               Join us in celebrating Kenya's rich cultural heritage through our exciting upcoming events and programs
             </p>
           </div>
-          
-          {/* Events Grid */}
+
           <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
             {upcomingEvents.map((event, index) => (
               <div key={index} className="group bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
                 <div className="text-center">
                   <div className="text-4xl sm:text-5xl mb-4 sm:mb-6">{event.image}</div>
                   <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">{event.title}</h3>
-                  
                   <div className="flex items-center justify-center mb-2 text-yellow-400">
                     <Calendar className="w-4 h-4 mr-2" />
                     <span className="text-sm sm:text-base font-medium">{event.date}</span>
                   </div>
-                  
                   <p className="text-white/80 text-sm sm:text-base mb-4">{event.location}</p>
                   <p className="text-white/70 text-xs sm:text-sm leading-relaxed mb-6">{event.description}</p>
-                  
                   <button className="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-all duration-300 transform group-hover:scale-105">
                     Learn More
                   </button>
@@ -231,7 +206,6 @@ const HomePage = () => {
             ))}
           </div>
           
-          {/* View All Events Button */}
           <div className="text-center mt-8 sm:mt-12">
             <button className="bg-white/20 hover:bg-white/30 border border-white/30 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 hover:shadow-lg transform hover:scale-105 flex items-center mx-auto">
               <Sparkles className="mr-2 w-5 h-5" />
@@ -243,13 +217,11 @@ const HomePage = () => {
 
       {/* Call-to-Action Section */}
       <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-orange-600 to-orange-500 text-white relative overflow-hidden">
-        {/* Background Elements */}
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute top-10 left-10 text-6xl opacity-20 animate-pulse">💫</div>
         <div className="absolute bottom-10 right-10 text-8xl opacity-20 animate-bounce">🚀</div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* Header */}
           <div className="mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6">Be Part of the Movement</h2>
             <p className="text-lg sm:text-xl lg:text-2xl max-w-4xl mx-auto leading-relaxed text-white/90">
@@ -257,9 +229,7 @@ const HomePage = () => {
             </p>
           </div>
           
-          {/* CTA Cards */}
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto mb-12 sm:mb-16">
-            {/* Join Community Card */}
             <div className="group bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
               <div className="text-4xl sm:text-5xl mb-4 sm:mb-6">🤝</div>
               <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Join Our Community</h3>
@@ -272,7 +242,6 @@ const HomePage = () => {
               </button>
             </div>
             
-            {/* Support Mission Card */}
             <div className="group bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
               <div className="text-4xl sm:text-5xl mb-4 sm:mb-6">❤️</div>
               <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Support Our Mission</h3>
@@ -285,26 +254,25 @@ const HomePage = () => {
               </button>
             </div>
           </div>
-          
-          {/* Additional CTA */}
+
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto">
             <h4 className="text-lg sm:text-xl font-bold mb-4">Ready to Make a Difference?</h4>
             <p className="text-white/90 mb-6 text-sm sm:text-base">
-              Whether you're an artist, educator, community leader, or simply passionate about culture, there's a place for you in our mission.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-yellow-500 hover:bg-yellow-400 text-amber-900 font-bold py-3 px-6 rounded-full transition-all duration-300 hover:shadow-lg transform hover:scale-105">
-                Get Involved
-              </button>
-              <button className="border-2 border-white hover:bg-white hover:text-orange-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-300">
-                Contact Us
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+              Whether you're anartist, educator, community leader, or simply passionate about culture, there's a place for you in our mission.
+</p>
+<div className="flex flex-col sm:flex-row gap-4 justify-center">
+<button className="bg-yellow-500 hover:bg-yellow-400 text-amber-900 font-bold py-3 px-6 rounded-full transition-all duration-300 hover:shadow-lg transform hover:scale-105">
+Get Involved
+</button>
+<button className="border-2 border-white hover:bg-white hover:text-orange-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-300">
+Contact Us
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+);
 };
 
 export default HomePage;

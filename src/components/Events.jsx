@@ -1,17 +1,5 @@
-// src/components/EventsCalendar.jsx
-
 import React, { useState, useEffect } from 'react';
-import {
-  FiCalendar,
-  FiMusic,
-  FiUsers,
-  FiAward,
-  FiMapPin,
-  FiClock,
-  FiChevronRight,
-  FiBookmark,
-  FiShare2
-} from 'react-icons/fi';
+import { FiCalendar, FiMusic, FiUsers, FiAward, FiMapPin, FiClock, FiChevronRight, FiBookmark, FiShare2 } from 'react-icons/fi';
 import { FaPalette } from 'react-icons/fa';
 
 const EventsCalendar = () => {
@@ -19,6 +7,7 @@ const EventsCalendar = () => {
   const [timeRemaining, setTimeRemaining] = useState({});
   const [savedEvents, setSavedEvents] = useState([]);
 
+  // Mock events data
   const events = [
     {
       id: 1,
@@ -30,7 +19,7 @@ const EventsCalendar = () => {
       time: "10:00 AM - 10:00 PM",
       icon: FiMusic,
       gradient: "from-orange-500 to-orange-600",
-      attendees: 1250
+      attendees: 1250,
     },
     {
       id: 2,
@@ -42,7 +31,7 @@ const EventsCalendar = () => {
       time: "9:00 AM - 6:00 PM",
       icon: FiUsers,
       gradient: "from-orange-600 to-red-500",
-      attendees: 850
+      attendees: 850,
     },
     {
       id: 3,
@@ -54,7 +43,7 @@ const EventsCalendar = () => {
       time: "11:00 AM - 8:00 PM",
       icon: FaPalette,
       gradient: "from-red-500 to-orange-500",
-      attendees: 3200
+      attendees: 3200,
     },
     {
       id: 4,
@@ -66,16 +55,19 @@ const EventsCalendar = () => {
       time: "2:00 PM - 11:00 PM",
       icon: FiAward,
       gradient: "from-orange-500 to-yellow-500",
-      attendees: 2100
-    }
+      attendees: 2100,
+    },
   ];
 
-  // calculate countdown for each event
+  // Format date for display
+  const formatDate = (d) => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+  // Update countdown for each event
   useEffect(() => {
     const updateCountdowns = () => {
       const now = Date.now();
       const remaining = {};
-      events.forEach(ev => {
+      events.forEach((ev) => {
         const diff = ev.date.getTime() - now;
         if (diff > 0) {
           const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -84,7 +76,7 @@ const EventsCalendar = () => {
           const seconds = Math.floor((diff / 1000) % 60);
           remaining[ev.id] = { days, hours, minutes, seconds };
         } else {
-          remaining[ev.id] = null; // no countdown for past events
+          remaining[ev.id] = null; // No countdown for past events
         }
       });
       setTimeRemaining(remaining);
@@ -93,13 +85,15 @@ const EventsCalendar = () => {
     updateCountdowns();
     const timer = setInterval(updateCountdowns, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [events]);
 
-  const formatDate = (d) =>
-    d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  // Toggle saved events
+  const toggleSave = (id) => setSavedEvents((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
-  const toggleSave = (id) =>
-    setSavedEvents(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+  // Handle event selection
+  const handleSelectEvent = (id) => {
+    setSelectedEvent((prev) => (prev === id ? null : id));
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#2a1607] to-[#42210B] text-white">
@@ -114,13 +108,13 @@ const EventsCalendar = () => {
 
       {/* Events Grid */}
       <main className="px-6 pb-16">
-        <div className="max-w-6xl mx-auto grid gap-8 md:grid-cols-2">
-          {events.map(ev => {
+        <div className="max-w-6xl mx-auto grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {events.map((ev) => {
             const Countdown = timeRemaining[ev.id];
             return (
               <div
                 key={ev.id}
-                onClick={() => setSelectedEvent(prev => prev === ev.id ? null : ev.id)}
+                onClick={() => handleSelectEvent(ev.id)}
                 className="relative group rounded-2xl bg-black/40 backdrop-blur-sm border border-orange-500/20 p-6 cursor-pointer transition hover:scale-105 hover:shadow-2xl"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-transparent opacity-10"></div>
@@ -128,7 +122,7 @@ const EventsCalendar = () => {
                   <div className={`p-3 rounded-xl bg-gradient-to-r ${ev.gradient} shadow-lg`}>
                     <ev.icon className="text-white" size={24} />
                   </div>
-                  {/* only show countdown badge if event is still upcoming */}
+                  {/* Only show countdown badge if event is still upcoming */}
                   {Countdown && (
                     <span className="px-3 py-1 text-sm rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30">
                       {Countdown.days > 0
@@ -150,7 +144,10 @@ const EventsCalendar = () => {
                 <div className="flex justify-between items-center">
                   <div className="flex space-x-2">
                     <button
-                      onClick={e => { e.stopPropagation(); toggleSave(ev.id); }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleSave(ev.id);
+                      }}
                       className="p-2 bg-black/30 rounded-full hover:bg-orange-500/20"
                     >
                       <FiBookmark
