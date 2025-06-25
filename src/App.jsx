@@ -25,8 +25,11 @@ import Partnership from './components/partners/Partnership';
 import LatestAnnouncements from './components/blog/LatestAnnouncements'; // Assuming you have a LatestAnnouncements component
 import FeatureArticle from './components/blog/FeatureArticle'; // Assuming you have a FeatureArticle component
 import StoriesFromCommunity from './components/blog/StoriesFromCommunity';
-
-
+import DonatePage from './components/donation/DonatePage'; // Assuming you have a DonatePage component
+import Videos from './components/media/Videos'; // Assuming you have a Videos component
+import Testimonials from './components/media/Testimonials'; // Assuming you have a Testimonials component
+import EventHighlights from './components/media/EventHighlights'; // Assuming you have an EventHighlights component
+import PressAndArticles from './components/media/PressAndArticles'; // Assuming you have a PressAndArticles component
 
 
 function App() {
@@ -48,6 +51,10 @@ function App() {
           <Route path="/member" element={<Member />} />
           <Route path="/opportunities" element={<Opportunities />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="media/videos" element={<Videos />} />
+          <Route path="/media/testimonials" element={<Testimonials />} />
+          <Route path="/media/highlights" element={<EventHighlights />} />
+          <Route path="/media/press" element={<PressAndArticles />} />
           <Route path="/programs/community-arts" element={<CommunityArts />} />
           <Route path="/programs/youth-talent" element={<YouthTalent />} /> 
           <Route path="/programs/world-culture-day" element={<WorldCultureDay />} />
@@ -58,6 +65,7 @@ function App() {
           <Route path="/blog/announcements" element={<LatestAnnouncements />} />
           <Route path="/blog/features" element={<FeatureArticle />} />
           <Route path="/blog/stories" element={<StoriesFromCommunity />} />
+          <Route path="/donate" element={<DonatePage />} />
         </Route>
       </Routes>
     </Router>

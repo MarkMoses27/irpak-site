@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { href, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import logo from '../assets/Logo.png';  // Correct path to the logo image
 
 export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -26,10 +27,17 @@ export default function Navbar() {
   };
 
   const logoStyle = {
+    display: 'flex',
+    alignItems: 'center',
     fontSize: '24px',
     fontWeight: 'bold',
     color: '#111',
     flex: '1 1 auto'
+  };
+
+  const logoImageStyle = {
+    height: '40px', // Adjust the size of the logo
+    marginRight: '10px', // Optional, to add space between the logo and text
   };
 
   const centerNavStyle = {
@@ -126,10 +134,7 @@ export default function Navbar() {
         { title: 'Arts tours', href: '/programs/arts-tours' }
       ]
     },
-    {
-      title: 'Events', href: '/events',
-      
-    },
+    { title: 'Events', href: '/events' },
     {
       title: 'Get Involved',
       submenu: [
@@ -171,15 +176,15 @@ export default function Navbar() {
         { title: 'Partnership Opportunities', href: '/partners/opportunities' }
       ]
     },
-    {
-      title: 'Contact Us',
-      href: '/contact'
-    }
+    { title: 'Contact Us', href: '/contact' }
   ];
 
   return (
     <nav style={navStyle}>
-      <div style={logoStyle}>IRPAK</div>
+      <div style={logoStyle}>
+        <img src={logo} alt="IRPAK Logo" style={logoImageStyle} /> {/* Using imported logo */}
+        <div>IRPAK</div>
+      </div>
 
       <div style={hamburgerStyle} onClick={() => setMobileOpen(!mobileOpen)}>
         {mobileOpen ? '✕' : '☰'}
@@ -195,7 +200,7 @@ export default function Navbar() {
             onClick={() => isMobile && setActiveMenu(activeMenu === index ? null : index)}
           >
             {!item.submenu ? (
-              <Link to={item.href || '#'} style={{ textDecoration: 'none', color: '#111', }}>
+              <Link to={item.href || '#'} style={{ textDecoration: 'none', color: '#111' }}>
                 {item.title}
               </Link>
             ) : (
