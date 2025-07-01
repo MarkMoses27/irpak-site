@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/Logo.png';  // Correct path to the logo image
 
@@ -6,12 +6,24 @@ export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navRef = useRef();
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+
+    const handleClickOutside = (event) => {
+      if (isMobile && mobileOpen && navRef.current && !navRef.current.contains(event.target)) {
+        setMobileOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMobile, mobileOpen]);
 
   const navStyle = {
     display: 'flex',
@@ -36,8 +48,8 @@ export default function Navbar() {
   };
 
   const logoImageStyle = {
-    height: '40px', // Adjust the size of the logo
-    marginRight: '10px', // Optional, to add space between the logo and text
+    height: '40px',
+    marginRight: '10px',
   };
 
   const centerNavStyle = {
@@ -180,9 +192,9 @@ export default function Navbar() {
   ];
 
   return (
-    <nav style={navStyle}>
+    <nav style={navStyle} ref={navRef}>
       <div style={logoStyle}>
-        <img src={logo} alt="IRPAK Logo" style={logoImageStyle} /> {/* Using imported logo */}
+        <img src={logo} alt="IRPAK Logo" style={logoImageStyle} />
         <div>IRPAK</div>
       </div>
 
@@ -200,7 +212,7 @@ export default function Navbar() {
             onClick={() => isMobile && setActiveMenu(activeMenu === index ? null : index)}
           >
             {!item.submenu ? (
-              <Link to={item.href || '#'} style={{ textDecoration: 'none', color: '#111' }}>
+              <Link to={item.href || '#'} style={{ textDecoration: 'none', color: '#111' }} onClick={() => setMobileOpen(false)}>
                 {item.title}
               </Link>
             ) : (
@@ -211,7 +223,7 @@ export default function Navbar() {
             {activeMenu === index && item.submenu && (
               <div style={dropdownStyle(index)}>
                 {item.submenu.map((subItem, subIdx) => (
-                  <Link key={subIdx} to={subItem.href || '#'} style={dropdownItemStyle}>
+                  <Link key={subIdx} to={subItem.href || '#'} style={dropdownItemStyle} onClick={() => setMobileOpen(false)}>
                     {subItem.title} <span style={{ fontSize: '10px' }}>&rarr;</span>
                   </Link>
                 ))}
